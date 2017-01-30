@@ -31,7 +31,7 @@ public class StashBuilds {
     }
 
     public void onStarted(AbstractBuild build) {
-        StashCause cause = this.getCause(build);
+        StashCause cause = ExcternalLaunchSupport.resolveOnStartedStashCause(this.getCause(build), repository, trigger, build);
         if (cause == null) {
             return;
         }
@@ -43,7 +43,7 @@ public class StashBuilds {
     }
 
     public void onCompleted(AbstractBuild build) {
-        StashCause cause = this.getCause(build);
+        StashCause cause = ExcternalLaunchSupport.resolveOnCompletedStashCause(this.getCause(build), build);
         if (cause == null) {
             return;
         }
